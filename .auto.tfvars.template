@@ -1,3 +1,3 @@
-PROXMOX_URL = ""
-PROXMOX_TOKEN_ID = ""
-PROXMOX_TOKEN_SECRET = ""
+PROXMOX_URL = "https://<my-proxmox-server>:8006/api2/json"
+PROXMOX_TOKEN_ID = "terraform-prov@pve!mytoken"
+PROXMOX_TOKEN_SECRET = "my-token-secret"
