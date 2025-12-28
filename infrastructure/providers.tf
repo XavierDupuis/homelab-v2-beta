@@ -10,19 +10,6 @@ terraform {
   }
 }
 
-variable "PROXMOX_URL" {
-  type = string
-}
-
-variable "PROXMOX_USER" {
-  type = string
-}
-
-variable "PROXMOX_TOKEN" {
-  type      = string
-  sensitive = true
-}
-
 provider "proxmox" {
   pm_api_url          = var.PROXMOX_URL
   pm_api_token_id     = var.PROXMOX_TOKEN_ID
