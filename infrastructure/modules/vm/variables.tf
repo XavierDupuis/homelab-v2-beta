@@ -1,3 +1,7 @@
+variable "PROXMOX_NODE_NAME" {
+    type = string
+}
+
 variable "VM_ID" {
     type = number
 }
