@@ -17,6 +17,6 @@ provider "proxmox" {
 
   ssh {
     agent = true
-    username = "terraform"
+    username = var.PROXMOX_USERNAME
   }
 }
