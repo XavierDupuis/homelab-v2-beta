@@ -23,5 +23,5 @@ provider "proxmox" {
 
   random_vm_ids       = true
   random_vm_id_start  = 8000 
-  random_vm_id_end    = 8999
+  random_vm_id_end    = 8099
 }
