@@ -1,18 +1,17 @@
-# https://registry.terraform.io/providers/Telmate/proxmox/latest/docs
-# https://github.com/Telmate/terraform-provider-proxmox
+# https://registry.terraform.io/providers/bpg/proxmox/latest/docs
+# https://github.com/bpg/terraform-provider-proxmox
 terraform {
-  required_version = ">= 0.13.0"
+  required_version = ">= 1.5.0"
   required_providers {
     proxmox = {
-      source = "telmate/proxmox"
-      version = "3.0.2-rc04" # Needed for PVE 9
+      source = "bgp/proxmox"
+      version = "0.91.0"
     }
   }
 }
 
 provider "proxmox" {
-  pm_api_url          = var.PROXMOX_URL
-  pm_api_token_id     = var.PROXMOX_TOKEN_ID
-  pm_api_token_secret = var.PROXMOX_TOKEN_SECRET
-  pm_tls_insecure     = true
+  endpoint            = var.PROXMOX_URL
+  api_token           = "${var.PROXMOX_TOKEN_ID}=${var.PROXMOX_TOKEN_SECRET}"
+  insecure            = true
 }
