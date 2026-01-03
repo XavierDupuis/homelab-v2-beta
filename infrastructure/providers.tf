@@ -14,4 +14,9 @@ provider "proxmox" {
   endpoint            = var.PROXMOX_ENDPOINT
   api_token           = "${var.PROXMOX_TOKEN_ID}=${var.PROXMOX_TOKEN_SECRET}"
   insecure            = true
+
+  ssh {
+    agent = true
+    username = "terraform-prov"
+  }
 }
