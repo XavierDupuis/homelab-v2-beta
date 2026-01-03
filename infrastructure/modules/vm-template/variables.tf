@@ -2,6 +2,6 @@ variable "PROXMOX_NODE_NAME" {
     type = string
 }
 
-variable "VM_TEMPLATE_NAME" {
+variable "VM_NAME" {
     type = string
 }

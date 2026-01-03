@@ -1,13 +1,13 @@
 resource "proxmox_virtual_environment_vm" "ubuntu_template" {
-  name      = "ubuntu-template"
-  node_name = var.virtual_environment_node_name
+  name      = var.VM_NAME
+  node_name = var.PROXMOX_NODE_NAME
 
   template = true
   started  = false
 
   machine     = "q35"
   bios        = "ovmf"
-  description = "Managed by Terraform"
+  description = "Ubuntu Template. Managed by Terraform"
 
   cpu {
     cores = 2
@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
-    size         = 20
+    size         = 4
   }
 
   initialization {
@@ -49,7 +49,6 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
 resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
   content_type = "iso"
   datastore_id = "local"
-  node_name    = var.virtual_environment_node_name
-
+  node_name    = var.PROXMOX_NODE_NAME
   url = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }

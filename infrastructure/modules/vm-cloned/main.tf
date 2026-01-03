@@ -1,9 +1,9 @@
 resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
-  node_name = var.virtual_environment_node_name
-  name      = "ubuntu-clone"
+  node_name = var.PROXMOX_NODE_NAME
+  name      = var.VM_NAME
 
   clone = {
-    source_vm_id = proxmox_virtual_environment_vm.ubuntu_template.vm_id
+    source_vm_id = var.VM_TEMPLATE_ID
     full         = true
   }
 
