@@ -1,5 +1,5 @@
-resource "proxmox_virtual_environment_vm" "this" {
-  name      = "debian-template"
+resource "proxmox_virtual_environment_vm" "ubuntu_template" {
+  name      = "ubuntu-template"
   node_name = var.virtual_environment_node_name
 
   template = true
@@ -7,7 +7,7 @@ resource "proxmox_virtual_environment_vm" "this" {
 
   machine     = "q35"
   bios        = "ovmf"
-  description = "Debian 13 template. Managed by Terraform."
+  description = "Managed by Terraform"
 
   cpu {
     cores = 2
@@ -24,11 +24,11 @@ resource "proxmox_virtual_environment_vm" "this" {
 
   disk {
     datastore_id = var.datastore_id
-    file_id      = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
-    size         = 4
+    size         = 20
   }
 
   initialization {
@@ -44,14 +44,12 @@ resource "proxmox_virtual_environment_vm" "this" {
   network_device {
     bridge = "vmbr0"
   }
-
 }
 
-resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
-  content_type = "import"
+resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
+  content_type = "iso"
   datastore_id = "local"
   node_name    = var.virtual_environment_node_name
-  url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2"
-  # need the file to be *.qcow2 to indicate the actual file format for import
-  file_name = "debian-13-generic-amd64.qcow2"
+
+  url = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
 }
