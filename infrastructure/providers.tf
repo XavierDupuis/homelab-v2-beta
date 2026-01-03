@@ -14,8 +14,8 @@ provider "proxmox" {
   endpoint            = var.PROXMOX_ENDPOINT
   # api_token           = "${var.PROXMOX_USERNAME}!${var.PROXMOX_TOKEN_ID}=${var.PROXMOX_TOKEN_SECRET}"
   insecure            = true
-  username = var.PROXMOX_USERNAME
-  password = var.PROXMOX_PASSWORD
+  # username = var.PROXMOX_USERNAME
+  # password = var.PROXMOX_PASSWORD
 
   # ssh {
   #   # agent = true
