@@ -1,54 +1,52 @@
-resource "proxmox_virtual_environment_vm" "ubuntu_template" {
+resource "proxmox_virtual_environment_vm" "this" {
   name      = var.VM_NAME
   node_name = var.PROXMOX_NODE_NAME
 
+  on_boot = true
+  # should be true if qemu agent is not installed / enabled on the VM
+  stop_on_destroy = true
+
   template = true
-  started  = false
-
-  machine     = "q35"
-  bios        = "ovmf"
-  description = "Ubuntu Template. Managed by Terraform"
-
-  cpu {
-    cores = 2
-  }
-
-  memory {
-    dedicated = 2048
-  }
-
-  efi_disk {
-    datastore_id = "local-lvm"
-    type         = "4m"
-  }
-
-  disk {
-    datastore_id = "local-lvm"
-    file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
-    interface    = "virtio0"
-    iothread     = true
-    discard      = "on"
-    size         = 4
-  }
 
   initialization {
+    # uncomment and specify the datastore for cloud-init disk if default `local-lvm` is not available
+    # datastore_id = "local-lvm"
+
     ip_config {
       ipv4 {
         address = "dhcp"
       }
     }
 
-    # user_data_file_id = proxmox_virtual_environment_file.user_data_cloud_config.id
+    user_account {
+      username = "user"
+      password = "test"
+    }
+  }
+
+  disk {
+    datastore_id = "local-lvm"
+    import_from  = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    interface    = "virtio0"
+    iothread     = true
+    discard      = "on"
+    size         = 4
   }
 
   network_device {
     bridge = "vmbr0"
   }
+
+  lifecycle {
+    ignore_changes = [initialization["user_account"], ]
+  }
 }
 
-resource "proxmox_virtual_environment_download_file" "ubuntu_cloud_image" {
-  content_type = "iso"
+resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
+  content_type = "import"
   datastore_id = "local"
   node_name    = var.PROXMOX_NODE_NAME
-  url = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+  url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2"
+  # need the file to be *.qcow2 to indicate the actual file format for import
+  file_name    = "debian-13-generic-amd64.qcow2"
 }

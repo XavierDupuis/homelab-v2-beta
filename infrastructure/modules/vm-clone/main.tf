@@ -1,4 +1,4 @@
-resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
+resource "proxmox_virtual_environment_cloned_vm" "this" {
   node_name = var.PROXMOX_NODE_NAME
   name      = var.VM_NAME
 
@@ -26,8 +26,6 @@ resource "proxmox_virtual_environment_cloned_vm" "ubuntu_clone" {
   cpu = {
     cores = 2
   }
+
 }
 
-output "vm_id" {
-  value = proxmox_virtual_environment_cloned_vm.ubuntu_clone.id
-}
