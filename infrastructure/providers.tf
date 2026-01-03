@@ -19,5 +19,14 @@ provider "proxmox" {
     # agent = true
     username = var.PROXMOX_USERNAME
     password = var.PROXMOX_PASSWORD
+
+    node {
+      name    = var.PROXMOX_NODE_NAME
+      address = "192.168.1.14"
+    }
   }
+
+  random_vm_ids       = true
+  random_vm_id_start  = 8000 
+  random_vm_id_end    = 8999
 }
