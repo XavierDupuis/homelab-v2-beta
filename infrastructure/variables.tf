@@ -1,4 +1,4 @@
-variable "PROXMOX_URL" {
+variable "PROXMOX_ENDPOINT" {
   type = string
 }
 
