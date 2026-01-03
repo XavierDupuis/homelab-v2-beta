@@ -1,5 +1,6 @@
 PROXMOX_ENDPOINT = "https://<my-proxmox-server>:8006/api2/json"
 PROXMOX_NODE_NAME="pve"
 PROXMOX_USERNAME="terraform"
+PROXMOX_PASSWORD="my-user-password"
 PROXMOX_TOKEN_ID = "terraform@pve!mytoken"
 PROXMOX_TOKEN_SECRET = "my-token-secret"

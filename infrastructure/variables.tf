@@ -10,6 +10,11 @@ variable "PROXMOX_USERNAME" {
   type = string
 }
 
+variable "PROXMOX_PASSWORD" {
+  type      = string
+  sensitive = true
+}
+
 variable "PROXMOX_TOKEN_ID" {
   type = string
 }
