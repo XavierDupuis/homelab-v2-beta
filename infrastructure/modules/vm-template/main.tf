@@ -18,12 +18,12 @@ resource "proxmox_virtual_environment_vm" "ubuntu_template" {
   }
 
   efi_disk {
-    datastore_id = var.datastore_id
+    datastore_id = "local-lvm"
     type         = "4m"
   }
 
   disk {
-    datastore_id = var.datastore_id
+    datastore_id = "local-lvm"
     file_id      = proxmox_virtual_environment_download_file.ubuntu_cloud_image.id
     interface    = "virtio0"
     iothread     = true
