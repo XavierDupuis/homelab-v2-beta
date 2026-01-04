@@ -46,7 +46,7 @@ resource "proxmox_virtual_environment_download_file" "debian_cloud_image" {
   content_type = "import"
   datastore_id = "local"
   node_name    = var.PROXMOX_NODE_NAME
-  url          = "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-generic-amd64.qcow2"
+  url          = "https://cloud.debian.org/images/cloud/trixie/20251117-2299/debian-13-generic-amd64.qcow2"
   # need the file to be *.qcow2 to indicate the actual file format for import
   file_name    = "debian-13-generic-amd64.qcow2"
 }
